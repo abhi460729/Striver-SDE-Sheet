@@ -1,0 +1,38 @@
+class Solution {
+    //TC=O(M*N+N*M)
+    //SC=O(M+N)
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int dummyRows[] = new int[n];
+        int dummyColumns[] = new int[m];
+        for(int i=0;i<n;i++){
+            dummyRows[i]=-1;
+        }
+        for(int j=0;j<m;j++){
+            dummyColumns[j]=-1;
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==0){
+                    dummyRows[i]=0;
+                    dummyColumns[j]=0;
+                }
+            }
+        }
+        for(int i=0;i<dummyRows.length;i++){
+            if(dummyRows[i]==0){
+                for(int j=0;j<dummyColumns.length;j++){
+                     matrix[i][j]=0;
+                }
+            }
+        }
+        for(int j=0;j<dummyColumns.length;j++){
+            if(dummyColumns[j]==0){
+                for(int i=0;i<dummyRows.length;i++){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+}
