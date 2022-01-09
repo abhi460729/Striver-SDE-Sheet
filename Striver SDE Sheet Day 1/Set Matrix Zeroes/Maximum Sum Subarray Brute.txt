@@ -1,0 +1,19 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxsum=0; //TC=O(N^3)//Brute
+        if(nums.length==1){
+            return nums[0];
+        }
+        for(int i=0;i<=nums.length-1;i++){
+            for(int j=i;j<=nums.length-1;j++){
+                int sum=0;
+                for(int k=i;k<=j;k++){
+                    sum+=nums[k];
+                }
+                if(sum>maxsum)
+                    maxsum=sum;
+            }
+        }
+        return maxsum;
+    }
+}
