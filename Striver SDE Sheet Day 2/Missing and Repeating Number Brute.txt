@@ -1,0 +1,23 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> repeatedNumber(final List<Integer> A) {
+        int result[]= new int[A.size()];
+        for(int i=0;i<A.size();i++){
+            result[A.get(i)-1]++;
+        }
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(int i=0;i<result.length;i++){
+            if(result[i]>1){
+                res.add(i+1);
+            }
+        }
+        for(int i=0;i<result.length;i++){
+            if(result[i]==0){
+                res.add(i+1);
+            }
+        }
+        return res;
+    }
+}
+TC=O(N)
+SC=O(N)
