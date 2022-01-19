@@ -1,0 +1,45 @@
+class Solution {
+    public boolean binary_search(int nums[], int low, int high, int element){
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(nums[mid]==element){
+                return true;
+            }
+            else if(nums[mid]<element){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return false;
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        ArrayList<List<Integer>> res= new ArrayList<List<Integer>>();
+        int n=nums.length;
+        Arrays.sort(nums);
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                for(int k=j+1;k<n;k++){
+                    int x = target-nums[i]-nums[j]-nums[k];
+                    if(binary_search(nums,k+1,nums.length-1,x)){
+                        List<Integer> ans= new ArrayList<Integer>();
+                        ans.add(nums[i]);
+                        ans.add(nums[j]);
+                        ans.add(nums[k]);
+                        ans.add(x);
+                        if(res.contains(ans)){
+                            continue;
+                        }
+                        else{
+                            res.add(ans);
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+}
+TC=O(NlogN)+O(N^3logN)
+SC=O(M*4)

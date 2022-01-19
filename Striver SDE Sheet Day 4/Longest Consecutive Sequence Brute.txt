@@ -1,0 +1,29 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums==null || nums.length==0){
+            return 0;
+        }
+        
+        Arrays.sort(nums);
+        
+        //1, 2, 3, 4, 100, 200
+        
+        int ans=1;
+        int prev=nums[0];
+        int cur=1;
+        
+        for(int i=1;i<nums.length;i++){
+            if(prev+1==nums[i]){
+                cur++;
+            }
+            else if(nums[i]!=prev){
+                cur=1;
+            }
+            prev=nums[i];
+            ans=Math.max(ans,cur);
+        }
+        return ans;
+    }
+}
+//TC=O(NlogN)
+//SC=O(1)
