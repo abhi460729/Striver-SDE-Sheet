@@ -1,0 +1,27 @@
+class Solution {
+    public int trap(int[] height) {
+        int min=0;
+        for(int i=0;i<height.length;i++){
+            int leftmax=0;
+            int left=i;
+            while(left>=0){
+                if(height[left]>leftmax){
+                    leftmax=height[left];
+                }
+                left--;
+            }
+            int right=i;
+            int rightmax=0;
+            while(right<=height.length-1){
+                if(height[right]>rightmax){
+                    rightmax=height[right];
+                }
+                right++;
+            }
+            min+=Math.min(leftmax,rightmax)-height[i];
+        }
+        return min;
+    }
+}
+//TC=O(N^2)
+//SC=O(1)
