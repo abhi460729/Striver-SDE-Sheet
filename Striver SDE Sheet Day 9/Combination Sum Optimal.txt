@@ -1,0 +1,26 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ansList= new ArrayList<>();
+        combinationSumHelper(0,candidates,target,ansList,new ArrayList<>());
+        return ansList;
+    }
+    private void combinationSumHelper(int ind, int []arr, int target, List<List<Integer>> ansList,List<Integer> ds){
+        if(ind==arr.length){
+            if(target==0){
+                ansList.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+        if(arr[ind]<=target){
+            ds.add(arr[ind]);
+            combinationSumHelper(ind,arr,target-arr[ind],ansList,ds);
+            ds.remove(ds.size()-1);
+        }
+        combinationSumHelper(ind+1,arr,target,ansList,ds);
+    }
+}
+
+/*
+Time Complexity: O(2^t * k) where t is the target, k is the average length
+Space Complexity: O(k*x), k is the average length and x is the no. of combinations
+*/

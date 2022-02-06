@@ -1,0 +1,24 @@
+class Solution {
+    static void combinationSum2Helper(int ind, int[] arr, int target, List<List<Integer>> ansList,ArrayList<Integer> ds){
+        if(target==0){
+            ansList.add(new ArrayList<>(ds));
+            return;
+        }
+        for(int i=ind;i<arr.length;i++){
+            if(i>ind && arr[i]==arr[i-1])continue;
+            if(arr[i]>target)
+                break;
+            ds.add(arr[i]);
+            combinationSum2Helper(i+1,arr,target-arr[i],ansList,ds);
+            ds.remove(ds.size()-1);
+        }
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> ansList= new ArrayList<>();
+        Arrays.sort(candidates);
+        combinationSum2Helper(0,candidates,target,ansList,new ArrayList<>());
+        return ansList;
+    }
+}
+//Time Complexity:O(2^n*k)
+//Space Complexity:O(k*x)

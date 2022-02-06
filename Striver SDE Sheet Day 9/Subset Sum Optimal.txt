@@ -1,0 +1,20 @@
+class Solution{
+    public static void subsetSumsHelper(int start, int sum, ArrayList<Integer> subsets, ArrayList<Integer> arr, int N){
+        if(start==N){
+            subsets.add(sum);
+            return;
+        }
+        subsetSumsHelper(start+1,sum+arr.get(start),subsets,arr,N);
+        subsetSumsHelper(start+1,sum,subsets,arr,N);
+    }
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
+        // code here
+        ArrayList<Integer> subsets = new ArrayList<>();
+        subsetSumsHelper(0,0,subsets,arr,N);
+        Collections.sort(subsets);
+        return subsets;
+    }
+}
+
+//TC=O(2^N+2^NLOG2^N)
+//SC=O(2^N)
