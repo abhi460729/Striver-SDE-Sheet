@@ -1,0 +1,19 @@
+class Solution {
+    public static void rightSideViewHelper(TreeNode root,ArrayList<Integer> ds, int level){
+        if(root==null){
+            return;
+        }
+        if(ds.size()==level){
+            ds.add(root.val);
+        }
+        rightSideViewHelper(root.right,ds,level+1);
+        rightSideViewHelper(root.left,ds,level+1);
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        ArrayList<Integer> ds= new ArrayList<>();
+        rightSideViewHelper(root,ds,0);
+        return ds;
+    }
+}
+//TC=O(N)
+//SC=O(N)

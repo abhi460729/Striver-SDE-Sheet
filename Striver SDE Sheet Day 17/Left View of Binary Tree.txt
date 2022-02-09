@@ -1,0 +1,23 @@
+class Tree
+{
+    //Function to return list containing elements of left view of binary tree.
+    public static void leftViewHelper(Node root,ArrayList<Integer> ds, int level){
+        if(root==null){
+            return;
+        }
+        if(level==ds.size()){
+            ds.add(root.data);
+        }
+        leftViewHelper(root.left,ds,level+1);
+        leftViewHelper(root.right,ds,level+1);
+    }
+    ArrayList<Integer> leftView(Node root)
+    {
+      // Your code here
+      ArrayList<Integer> ds= new ArrayList<>();
+      leftViewHelper(root,ds,0);
+      return ds;
+    }
+}
+//TC=O(N)
+//SC=O(N)
