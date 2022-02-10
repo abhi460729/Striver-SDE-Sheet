@@ -1,0 +1,23 @@
+public class Solution {
+    public static boolean isPath(TreeNode A, ArrayList<Integer> ans, int B){
+        if(A==null){
+            return false;
+        }
+        ans.add(A.val);
+        if(A.val==B){
+            return true;
+        }
+        if(isPath(A.left,ans,B) || isPath(A.right,ans,B)){
+            return true;
+        }
+        ans.remove(ans.size()-1);
+        return false;
+    }
+    public ArrayList<Integer> solve(TreeNode A, int B) {
+        ArrayList<Integer> ans= new ArrayList<>();
+        boolean res=isPath(A,ans,B);
+        return ans;
+    }
+}
+//TC=O(N)
+//SC=O(N)
