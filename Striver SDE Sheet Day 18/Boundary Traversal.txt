@@ -1,0 +1,92 @@
+/************************************************************
+
+    Following is the Binary Tree node structure:
+    
+   class TreeNode {
+	    int data;
+	    TreeNode left;
+	    TreeNode right;
+
+	    TreeNode(int data) {
+		    this.data = data;
+		    this.left = null;
+		    this.right = null;
+	    }
+
+    }
+
+************************************************************/
+
+import java.util.ArrayList;
+
+public class Solution {
+    public static boolean isLeaf(TreeNode node){
+        if(node!=null){
+    		return node.left==null && node.right==null;
+        }
+        return true;
+    }
+    public static void addLeftSubTree(TreeNode node, ArrayList<Integer> res){
+        TreeNode curr=node.left;
+        while(curr!=null){
+            if(isLeaf(curr)==false){
+                res.add(curr.data);
+            }
+            if(curr.left!=null){
+                curr=curr.left;
+            }
+            else{
+                curr=curr.right;
+            }
+        }
+        return;
+    }
+    public static void addRightSubTree(TreeNode node, ArrayList<Integer> res){
+        ArrayList<Integer> temp=new ArrayList<Integer>();
+        TreeNode curr=node.right;
+        while(curr!=null){
+            if(isLeaf(curr)==false){
+                temp.add(curr.data);
+            }
+            if(curr.right!=null){
+                curr=curr.right;
+            }
+            else{
+                curr=curr.left;
+            }
+        }
+        int i;
+        for(i=temp.size()-1;i>=0;i--){
+            res.add(temp.get(i));
+        }
+        return;
+    }
+    public static void addLeaves(TreeNode node, ArrayList<Integer> res){
+        if(node==null){
+            return;
+        }
+        if(isLeaf(node)==true){
+            res.add(node.data);
+        }
+        if(node.left!=null){
+            addLeaves(node.left,res);
+        }
+        if(node.right!=null){
+            addLeaves(node.right,res);
+        }
+        return;
+    }
+	public static ArrayList<Integer> traverseBoundary(TreeNode root){
+		// Write your code here.
+        ArrayList<Integer> res= new ArrayList<Integer>();
+        if(isLeaf(root)==false){
+            res.add(root.data);
+        }
+        addLeftSubTree(root,res);
+        addLeaves(root,res);
+        addRightSubTree(root,res);
+        return res;
+	}
+}
+//TC=O(N)
+//SC=O(N)
