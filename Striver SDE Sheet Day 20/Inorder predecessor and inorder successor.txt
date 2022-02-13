@@ -1,0 +1,33 @@
+{
+        if(root == null) return;
+        
+        if(key>root.data)
+        {
+            p.pre = root;
+            findPreSuc(root.right, p, s, key);
+            
+        }
+        else if(key<root.data)
+        {
+            s.succ = root;
+            findPreSuc(root.left, p, s, key);
+        }
+        else
+        {
+            Node node = root.left;
+            while(node!=null && node.right!=null) node = node.right;
+            if(node!=null)
+            {
+                p.pre = node;
+            }
+            node = root.right;
+            while(node!=null && node.left!=null) node = node.left;
+            if(node!=null)
+            {
+                s.succ = node;
+            }
+        }
+        
+    }
+//TC=O(N)
+//SC=O(N)
