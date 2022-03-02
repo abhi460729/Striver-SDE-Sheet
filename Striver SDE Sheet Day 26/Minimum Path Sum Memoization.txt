@@ -1,0 +1,25 @@
+class Solution {
+    public int minPathSumHelper(int[][] grid, int i, int j, int dp[][]) {
+        if(i>=grid.length || j>=grid[0].length){
+            return Integer.MAX_VALUE;
+        }
+        if(i==grid.length-1 && j==grid[0].length-1){
+            return grid[i][j];
+        }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        return dp[i][j]=grid[i][j]+Math.min(minPathSumHelper(grid,i,j+1,dp),minPathSumHelper(grid,i+1,j,dp));
+    }
+    public int minPathSum(int[][] grid) {
+        int dp[][] = new int[grid.length][grid[0].length];
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                dp[i][j]=-1;
+            }
+        }
+        return minPathSumHelper(grid,0,0,dp);   
+    }
+}
+//TC=O(N^2)
+//SC=O(N^2)

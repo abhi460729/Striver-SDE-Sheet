@@ -1,0 +1,16 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        int result=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            int mul=nums[i];
+            for(int j=i+1;j<nums.length;j++){
+                result=Math.max(mul,result);
+                mul=mul*nums[j];
+            }
+            result=Math.max(mul,result);
+        }
+        return result;
+    }
+}
+//TC=O(N^2)
+//SC=O(1)

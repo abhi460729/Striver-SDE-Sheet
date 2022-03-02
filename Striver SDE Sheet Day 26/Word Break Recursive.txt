@@ -1,0 +1,33 @@
+public static boolean ifPresent(String x, ArrayList<String> B){
+        for(int i=0;i<B.size();i++){
+            if(x.equals(B.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean wordBreakH(String A, ArrayList<String> B )
+    {
+        //code here
+        int size=A.length();
+        if(size==0){
+            return true;
+        }
+        for(int i=1;i<=size;i++){
+            String subStr=A.substring(0,i);
+            if(ifPresent(subStr,B) && wordBreakH(A.substring(i),B)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static int wordBreak(String A, ArrayList<String> B )
+    {
+        //code here
+        if(wordBreakH(A,B)==true){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }

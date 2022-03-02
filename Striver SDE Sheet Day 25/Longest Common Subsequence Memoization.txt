@@ -1,0 +1,28 @@
+class Solution {
+    public int longestCommonSubsequenceHelper(String text1, String text2, int dp[][], int n, int m){
+        if(text1.length()==0 || text2.length()==0){
+            return 0;
+        }
+        if(text1.charAt(0)==text2.charAt(0)){
+            return dp[n][m]=1+longestCommonSubsequenceHelper(text1.substring(1),text2.substring(1),dp,n,m);
+        }
+        else{
+            int op1=longestCommonSubsequenceHelper(text1.substring(1),text2,dp,n,m);
+            int op2=longestCommonSubsequenceHelper(text1,text2.substring(1),dp,n,m);
+            return dp[n][m]=Math.max(op1,op2);
+        }
+    }
+    public int longestCommonSubsequence(String text1, String text2) {
+        int n=text1.length();
+        int m=text2.length();
+        int dp[][]= new int[n+1][m+1];
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=m;j++){
+                dp[i][j]=-1;
+            }
+        }
+        return longestCommonSubsequenceHelper(text1,text2,dp,n,m);
+    }
+}
+//TC=O(N^2)
+//SC=O(N^2)

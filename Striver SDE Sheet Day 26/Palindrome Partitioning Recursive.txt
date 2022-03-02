@@ -1,0 +1,38 @@
+static boolean isPalindrome(String str, int i, int j){
+        if(i==j){
+            return true;
+        }
+        if(i>j){
+            return true;
+        }
+        while(i<j){
+            if(str.charAt(i)!=str.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    static int palindromicPartitionHelper(String str, int i, int j){
+        if(i>=j)
+            return 0;
+        if(str.length()==0)
+            return 0;
+        if(isPalindrome(str,i,j)==true){
+            return 0;
+        }
+        int ans=Integer.MAX_VALUE;
+        for(int k=i;k<j;k++){
+            int temp=1+palindromicPartitionHelper(str,i,k)+palindromicPartitionHelper(str,k+1,j);
+            ans=Math.min(temp,ans);
+        }
+        return ans;
+    }
+    static int palindromicPartition(String str)
+    {
+        // code here
+        int i=0;
+        int j=str.length()-1;
+        return palindromicPartitionHelper(str,i,j);
+    }

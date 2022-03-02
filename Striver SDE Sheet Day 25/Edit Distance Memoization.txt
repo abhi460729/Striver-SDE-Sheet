@@ -1,0 +1,27 @@
+class Solution {
+    public int minDistanceHelper(String word1, String word2, int dp[][],int m, int n) {
+        if(word1.length()==0){
+            return dp[m][n]=word2.length();
+        }
+        if(word2.length()==0){
+            return dp[m][n]=word1.length();
+        }
+        if(word1.charAt(0)==word2.charAt(0)){
+            return dp[m][n]=minDistance(word1.substring(1),word2.substring(1));
+        }
+        else{
+            int insert=minDistance(word1,word2.substring(1));;
+            int delete=minDistance(word1.substring(1),word2);
+            int substitute=minDistance(word1.substring(1),word2.substring(1));
+            return dp[m][n]=1+Math.min(substitute,Math.min(insert,delete));
+        }
+    }
+    public int minDistance(String word1, String word2) {
+        int m=word1.length();
+        int n=word2.length();
+        int dp[][]= new int[m+1][n+1];
+        return minDistanceHelper(word1,word2,dp,m,n);
+    }
+}
+//TC=O(N^2)
+//SC=O(1)

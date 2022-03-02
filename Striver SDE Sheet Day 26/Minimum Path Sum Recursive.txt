@@ -1,0 +1,16 @@
+class Solution {
+    public int minPathSumHelper(int[][] grid, int m, int n) {
+        if(m<0 || n<0){
+            return Integer.MAX_VALUE;
+        }
+        if(m==0 && n==0){
+            return grid[m][n];
+        }
+        return grid[m][n]+Math.min(minPathSumHelper(grid,m-1,n),minPathSumHelper(grid,m,n-1));
+    }
+    public int minPathSum(int[][] grid) {
+        return minPathSumHelper(grid,grid.length-1,grid[0].length-1);   
+    }
+}
+//TC=O(2^N)
+//sc=O(1)

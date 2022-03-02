@@ -1,0 +1,21 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        if(nums.length==0 || nums==null){
+            return 0;
+        }
+        int ultimatemaximum=nums[0];
+        int maximum_ending_at_i=nums[0];
+        int minimum_ending_at_i=nums[0];
+        for(int i=1;i<nums.length;i++){
+            int temp=maximum_ending_at_i;
+            maximum_ending_at_i=Math.max(nums[i],Math.max(nums[i]*maximum_ending_at_i,nums[i]*minimum_ending_at_i));
+            minimum_ending_at_i=Math.min(nums[i],Math.min(nums[i]*temp,nums[i]*minimum_ending_at_i));
+            if(maximum_ending_at_i>ultimatemaximum){
+                ultimatemaximum=maximum_ending_at_i;
+            }
+        }
+        return ultimatemaximum;
+    }
+}
+//TC=O(N)
+//SC=O(1)

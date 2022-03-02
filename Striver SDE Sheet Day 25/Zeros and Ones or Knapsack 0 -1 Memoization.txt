@@ -1,0 +1,43 @@
+class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+        int dp[][][]= new int[m+1][n+1][strs.length];
+        int result=findMaxFromHelper(strs,m,n,0,dp);
+        return result;
+    }
+    public int findMaxFromHelper(String strs[], int zero, int one, int index, int dp[][][]){
+        if(index==strs.length || zero+one==0){
+            return 0;
+        }
+        
+        if(dp[zero][one][index]!=0){
+            return dp[zero][one][index];
+        }
+        
+        int count[]=count(strs[index]);
+        int take=0;
+        if(zero>=count[0] && one>=count[1]){
+            take=1+findMaxFromHelper(strs,zero-count[0],one-count[1],index+1,dp);
+        }
+        int nottake=findMaxFromHelper(strs,zero,one,index+1,dp);
+        
+        return dp[zero][one][index]=Math.max(take,nottake);
+    }
+    
+    int[] count(String str){
+        int zero=0,one=0;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)=='0'){
+                zero++;
+            }
+            else{
+                one++;
+            }
+        }
+        int c[]= new int[2];
+        c[0]=zero;
+        c[1]=one;
+        return c;
+    } 
+}
+//TC=O(N*3)
+//SC=O(N*3)
