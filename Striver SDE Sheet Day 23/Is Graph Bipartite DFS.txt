@@ -1,0 +1,31 @@
+class Solution {
+    public static boolean checkBipartiteDFS(int[][] graph, int node, int color[]){
+        for(int it:graph[node]){
+            if(color[it]==-1){
+                color[it]=1-color[node];
+                if(!checkBipartiteDFS(graph,it,color))
+                    return false;
+            }
+            else if(color[it]==color[node]){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean isBipartite(int[][] graph) {
+        int n=graph.length;
+        int color[]= new int[n];
+        for(int i=0;i<n;i++){
+            color[i]=-1;
+        }
+        for(int i=0;i<n;i++){
+            if(color[i]==-1){
+                if(!checkBipartiteDFS(graph,i,color)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
