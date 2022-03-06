@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+
+class Main
+{	
+	public static boolean isPlacePossible(int arr[], int distance, int cows){
+		int k=arr[0];
+		cows--;
+		for(int i=1;i<arr.length;i++){
+			if(arr[i]-k>distance){
+				cows--;
+				if(cows==0){
+					return true;
+				}
+				k=arr[i];
+			}
+		}
+		return false;
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		int arr[]={1,2,8,4,9};
+		Arrays.sort(arr);// 1, 2, 3, 4, 5
+		int size=5,cows=3;
+		int ans=Integer.MIN_VALUE;
+		for(int distance=1;distance<size;distance++){
+			if(isPlacePossible(arr,distance,m)){
+				ans=Math.min(ans,distance);
+			}
+		}
+		System.out.println(ans);
+	}
+}
