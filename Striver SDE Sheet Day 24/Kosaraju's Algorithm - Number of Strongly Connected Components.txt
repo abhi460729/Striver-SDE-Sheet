@@ -1,0 +1,63 @@
+class Solution
+{
+    //Function to find number of strongly connected components in the graph.
+    public static void dfs(int node, Stack<Integer> st, int visited[], ArrayList<ArrayList<Integer>> adj){
+        visited[node]=1;
+        for(int it: adj.get(node)){
+            if(visited[it]==0){
+                dfs(it,st,visited,adj);
+            }
+        }
+        st.push(node);
+    }
+    
+    public static void revdfs(int node, ArrayList<ArrayList<Integer>> adj, int visited[]){
+        visited[node]=1;
+        for(int it: adj.get(node)){
+            if(visited[it]==0){
+                revdfs(it,adj,visited);
+            }
+        }
+    }
+    
+    public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+        //code here
+        //Step 1:
+        Stack<Integer> st= new Stack<Integer>();
+        int visited[] = new int[V];
+        
+        for(int i=0;i<V;i++){
+            if(visited[i]==0){
+                dfs(i,st,visited,adj);
+            }
+        }
+        
+        //Step 2:
+        ArrayList<ArrayList<Integer>> transpose= new ArrayList<ArrayList<Integer>>();
+        
+        for(int i=0;i<V;i++){
+            transpose.add(new ArrayList<>());
+        }
+        
+        
+        for(int i=0;i<V;i++){
+            visited[i]=0;
+            for(int it:adj.get(i)){
+                transpose.get(it).add(i);
+            }
+        }
+        
+        //Step 3:
+        int count=0;
+        while(!st.isEmpty()){
+            int node=st.pop();
+            if(visited[node]==0){
+                count++;
+                revdfs(node,transpose,visited);
+            }
+        }
+        
+        return count;
+    }
+}
