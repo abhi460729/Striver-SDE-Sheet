@@ -1,0 +1,22 @@
+class Solution
+{
+    public List<String> AllPossibleStrings(String s)
+    {
+        // Code here
+        ArrayList<String> ans= new ArrayList<String>();
+        int n=s.length();
+        for(int num=0;num<(1<<n);num++){//2^n-1
+            String sub="";
+            for(int j=0;j<n;j++){
+                if ((num & (1 << j))!=0) {
+				sub += s.charAt(j);
+			    }
+            }
+            if(sub.length()>0){
+                ans.add(sub);
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}
